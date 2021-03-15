@@ -1,0 +1,5 @@
+tools
+NESASM3.exe
+*.nes
+*.fns
+docs.md
