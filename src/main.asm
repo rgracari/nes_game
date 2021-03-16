@@ -16,6 +16,10 @@ PPUSCROLL = $2005
 PPUADDR   = $2006
 PPUDATA   = $2007
 
+  ; Controllers Ports
+CONTROL1 = $4016
+CONTROL2 = $4017
+
 ;;;;;;;;;; END ASSEMBLY DIRECTIVES
 
 
@@ -27,7 +31,7 @@ RESET:
   .include "reset.asm"
 
 NMI:
-  .include "draw.asm"
+  .include "update.asm"
 
 ;;;;;;;;;; END PRG ROM DATA
 
@@ -41,8 +45,15 @@ NMI:
   .bank 1
   .org $E000 
 PaletteColors: 
-  .db $0F,$31,$32,$33,$0F,$35,$36,$37,$0F,$39,$3A,$3B,$0F,$3D,$3E,$0F
-  .db $0F,$1C,$15,$14,$0F,$02,$38,$3C,$0F,$1C,$15,$14,$0F,$02,$38,$3C
+  .db $0F,$13,$16,$36,$0F,$35,$36,$37,$0F,$39,$3A,$3B,$0F,$3D,$3E,$0F
+  .db $0F,$13,$16,$36,$0F,$02,$38,$3C,$0F,$1C,$15,$14,$0F,$02,$38,$3C
+
+SpritesData:
+     ;vert tile attr horiz
+  .db $80, $00, $00, $80   ;sprite 0
+  .db $80, $01, $00, $88   ;sprite 1
+  .db $88, $10, $00, $80   ;sprite 2
+  .db $88, $11, $00, $88   ;sprite 3
 
 ;;;;;;;;;; END COLOR PALETTE
 

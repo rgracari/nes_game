@@ -53,18 +53,20 @@ LoadPalettesLoop:
   CPX #$20
   BNE LoadPalettesLoop
 
-;;;; TEMP DATA
-  LDA #$20
-  STA $0200        ; put sprite 0 in center ($80) of screen vert
-  STA $0203        ; put sprite 0 in center ($80) of screen horiz
-  LDA #$00
-  STA $0201        ; tile number = 0
-  STA $0202        ; color = 0, no flipping
+;;;; Initial Sprites
+LoadSprites:
+  LDX #$00 
+LoadSpritesLoop:
+  LDA SpritesData, x
+  STA $0200, x
+  INX
+  CPX #$10
+  BNE LoadSpritesLoop
 
 ;;;; Setting up the PPU configuration 
   LDA #%10000000    ; activate the NMI
   STA PPUCTRL
-  LDA #%00010000    ; intensify reds and blues
+  LDA #%00010000    ; activate sprite rendering
   STA PPUMASK       ; the PPUMASK
 
 ;;;; Loop doing nothing and waiting for the NMI vector
