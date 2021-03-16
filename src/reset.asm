@@ -8,13 +8,13 @@
   LDX #$FF
   TXS          ; Set up stack
   INX          ; now X = 0
-  STX $2000    ; disable NMI
-  STX $2001    ; disable rendering
+  STX PPUCTRL    ; disable NMI
+  STX PPUMASK    ; disable rendering
   STX $4010    ; disable DMC IRQs
 
 ;;;; First wait for vblank to make sure PPU is ready
 vblankwait1: 
-  BIT $2002
+  BIT PPUSTATUS
   BPL vblankwait1
 
 ;;;; Setting all the 2KB CPU memory to $00 we are making sure its $00 
@@ -34,27 +34,27 @@ clrmem:
   
 ;;;; Second wait for vblank, PPU is ready after this
 vblankwait2:      
-  BIT $2002
+  BIT PPUSTATUS
   BPL vblankwait2
 
 ;;;; Here we are loading the 2x 16 bytes color palettes
 LoadPalettes:
-  LDA $2002   ; read the PPU status to reset the latch
+  LDA PPUSTATUS   ; read the PPU status to reset the latch
   LDA #$3F    ; High byte first
-  STA $2006   ; $2006 is used to set the PPU address
+  STA PPUADDR   ; PPUADDR is used to set the PPU address
   LDA #$00    ; low byte second the PPU is set to $3F00
-  STA $2006   ; the PPU auto increment when $2007 is written
+  STA PPUADDR   ; the PPU auto increment when PPUDATA is written
   
   LDX #$00    ; we set the x register to $00 for indexing
 LoadPalettesLoop:
   LDA PaletteColors, x  ; here x is the index of the PaletteColors
-  STA $2007
+  STA PPUDATA
   INX
   CPX #$20
   BNE LoadPalettesLoop
 
 ;;;; TEMP DATA
-  LDA #$50
+  LDA #$20
   STA $0200        ; put sprite 0 in center ($80) of screen vert
   STA $0203        ; put sprite 0 in center ($80) of screen horiz
   LDA #$00
@@ -63,9 +63,9 @@ LoadPalettesLoop:
 
 ;;;; Setting up the PPU configuration 
   LDA #%10000000    ; activate the NMI
-  STA $2000         ; the PPUCTRL
+  STA PPUCTRL
   LDA #%00010000    ; intensify reds and blues
-  STA $2001         ; the PPUMASK
+  STA PPUMASK       ; the PPUMASK
 
 ;;;; Loop doing nothing and waiting for the NMI vector
 Forever:

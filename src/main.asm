@@ -6,6 +6,16 @@
   .inesmap 0    ; no mapper
   .inesmir 1    ; background mirroring
 
+  ; PPU Ports
+PPUCTRL   = $2000
+PPUMASK   = $2001
+PPUSTATUS = $2002
+OAMADDR   = $2003
+OAMDATA   = $2004
+PPUSCROLL = $2005
+PPUADDR   = $2006
+PPUDATA   = $2007
+
 ;;;;;;;;;; END ASSEMBLY DIRECTIVES
 
 
