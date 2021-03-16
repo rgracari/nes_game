@@ -1,6 +1,6 @@
 ;;;;;;;;;; ASSEMBLY DIRECTIVES
 
-  ; 1 bank = 8KB
+  ; 1x bank = 8KB
   .inesprg 1    ; 1x 16KB PRG / bank 0 & 1
   .ineschr 1    ; 1x 8KB CHR  / bank 2
   .inesmap 0    ; no mapper
@@ -17,14 +17,28 @@ RESET:
   .include "reset.asm"
 
 NMI:
-  RTI
+  .include "draw.asm"
 
 ;;;;;;;;;; END PRG ROM DATA
 
 
-;;;;;;;;;; VECTORS SETUP
+;;;;;;;;;; COLOR PALETTE
+
+  ; We store the palette color data in the PGR ROM and we will
+  ; store for each vblank to palette color data.
+  ; $E000 address is arbitrary and temporary.
 
   .bank 1
+  .org $E000 
+PaletteColors: 
+  .db $0F,$31,$32,$33,$0F,$35,$36,$37,$0F,$39,$3A,$3B,$0F,$3D,$3E,$0F
+  .db $0F,$1C,$15,$14,$0F,$02,$38,$3C,$0F,$1C,$15,$14,$0F,$02,$38,$3C
+
+;;;;;;;;;; END COLOR PALETTE
+
+
+;;;;;;;;;; VECTORS SETUP
+
   .org $FFFA    ; Must start at $FFFA
   .dw NMI       ; Vblank vector
   .dw RESET     ; Reset vector
@@ -34,6 +48,9 @@ NMI:
 
 
 ;;;;;;;;;; CHR DATA
+
+  ; All the graphical data, all the tiles of 8x8 pixel.
+  ; 4KB for the background and 4KB for the sprites 
 
   .bank 2
   .org $0000
