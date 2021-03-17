@@ -36,5 +36,17 @@ ReadB:
   STA $203
 ReadBDone:
 
+;;;; Clean up the PPU and be ready for the next interrupt
+  LDA #%10010000    ; activate the NMI
+  STA PPUCTRL
+
+  LDA #%00011110    ; activate sprite rendering
+  STA PPUMASK
+
+;;;; Tell the PPU to not applied any bacground scrolling
+  LDA #$00
+  STA PPUSCROLL
+  STA PPUSCROLL
+
 ;;;; return from the interrupt
   RTI       

@@ -63,10 +63,43 @@ LoadSpritesLoop:
   CPX #$10
   BNE LoadSpritesLoop
 
+;;;; Load background Nametable 0
+LoadBackground:
+  LDA PPUSTATUS
+  LDA #$20
+  STA PPUADDR
+  LDA #$00
+  STA PPUADDR
+
+  LDX #$00
+LoadBackgroundLoop:
+  LDA BackgroundNametable, x
+  STA PPUDATA
+  INX
+  CPX #$80
+  BNE LoadBackgroundLoop 
+
+;;;; Load AttributeTable
+LoadAttribute:
+  LDA PPUSTATUS     ; Reset the latch
+  LDA #$23
+  STA PPUADDR
+  LDA #$C0
+  STA PPUADDR
+
+  LDX #$00
+LoadAttributeLoop:
+  LDA AttributeTable, x
+  STA PPUDATA
+  INX
+  CPX #$08
+  BNE LoadAttributeLoop
+
 ;;;; Setting up the PPU configuration 
-  LDA #%10000000    ; activate the NMI
+  LDA #%10010000    ; activate the NMI
   STA PPUCTRL
-  LDA #%00010000    ; activate sprite rendering
+
+  LDA #%00011110    ; activate sprite rendering
   STA PPUMASK       ; the PPUMASK
 
 ;;;; Loop doing nothing and waiting for the NMI vector
