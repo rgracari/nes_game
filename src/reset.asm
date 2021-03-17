@@ -102,6 +102,10 @@ LoadAttributeLoop:
   LDA #GAMESTATE_INTRO
   STA gamestate
 
+  LDA #$10
+  STA player1x
+  STA player1y
+
 ;;;; Loop doing nothing and waiting for the NMI vector
 Forever:
   JMP Forever

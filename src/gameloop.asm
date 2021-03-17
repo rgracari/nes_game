@@ -2,10 +2,8 @@
   .include "render.asm"
 
 ;;;; Read controls
-  .include "input.asm"
+  JSR ReadController1
+  JSR ReadController2
 
 ;;;; Engine
   .include "update.asm"
-
-;;;; return from the NMI interrupt
-  RTI
