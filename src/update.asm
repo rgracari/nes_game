@@ -14,27 +14,9 @@ LatchControllers:
   LDA #$00
   STA CONTROL1
 
-ReadA:
-  LDA $4016
-  AND #%00000001
-  BEQ ReadADone
-
-  LDA $203
-  CLC
-  ADC #$01
-  STA $203
-ReadADone:
-
-ReadB:
-  LDA $4016
-  AND #%00000001
-  BEQ ReadBDone
-
-  LDA $203
-  SEC
-  SBC #$01
-  STA $203
-ReadBDone:
+;;;; Read controls
+  JSR ReadController1
+  JSR ReadController2
 
 ;;;; Clean up the PPU and be ready for the next interrupt
   LDA #%10010000    ; activate the NMI

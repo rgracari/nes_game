@@ -13,9 +13,7 @@
   STX $4010    ; disable DMC IRQs
 
 ;;;; First wait for vblank to make sure PPU is ready
-vblankwait1: 
-  BIT PPUSTATUS
-  BPL vblankwait1
+  JSR vblankwait
 
 ;;;; Setting all the 2KB CPU memory to $00 we are making sure its $00 
 clrmem:
@@ -33,9 +31,7 @@ clrmem:
   BNE clrmem
   
 ;;;; Second wait for vblank, PPU is ready after this
-vblankwait2:      
-  BIT PPUSTATUS
-  BPL vblankwait2
+  JSR vblankwait
 
 ;;;; Here we are loading the 2x 16 bytes color palettes
 LoadPalettes:

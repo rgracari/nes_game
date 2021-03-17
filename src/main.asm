@@ -6,19 +6,8 @@
   .inesmap 0    ; no mapper
   .inesmir 1    ; background mirroring
 
-  ; PPU Ports
-PPUCTRL   = $2000
-PPUMASK   = $2001
-PPUSTATUS = $2002
-OAMADDR   = $2003
-OAMDATA   = $2004
-PPUSCROLL = $2005
-PPUADDR   = $2006
-PPUDATA   = $2007
-
-  ; Controllers Ports
-CONTROL1 = $4016
-CONTROL2 = $4017
+  ;;;; Include all of the constants
+  .include "constant.asm"
 
 ;;;;;;;;;; END ASSEMBLY DIRECTIVES
 
@@ -27,6 +16,8 @@ CONTROL2 = $4017
 
   .bank 0
   .org $C000
+  .include "func.asm"
+
 RESET:
   .include "reset.asm"
 
@@ -45,7 +36,7 @@ NMI:
   .bank 1
   .org $E000 
 PaletteColors: 
-  .db $0F,$13,$16,$36,$0F,$35,$36,$37,$0F,$39,$3A,$3B,$0F,$3D,$3E,$0F
+  .db $0F,$1C,$2B,$39,$0F,$06,$15,$36,$0F,$39,$3A,$3B,$0F,$3D,$3E,$0F
   .db $0F,$13,$16,$36,$0F,$02,$38,$3C,$0F,$1C,$15,$14,$0F,$02,$38,$3C
 
 SpritesData:
@@ -69,7 +60,7 @@ BackgroundNametable:
   .db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$55,$56,$00,$00  ;;brick bottoms
 
 AttributeTable:
-  .db %00000000, %00010000, %01010000, %00010000, %00000000, %00000000, %00000000, %00110000
+  .db %00000001, %00000100, %00000000, %00000101, %00000000, %00000000, %00000101, %00000000
 
 ;;;;;;;;;; END STORE DATA
 
