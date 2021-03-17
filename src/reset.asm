@@ -98,6 +98,10 @@ LoadAttributeLoop:
   LDA #%00011110    ; activate sprite rendering
   STA PPUMASK       ; the PPUMASK
 
+;;;; Game special initialization
+  LDA #GAMESTATE_INTRO
+  STA gamestate
+
 ;;;; Loop doing nothing and waiting for the NMI vector
 Forever:
   JMP Forever

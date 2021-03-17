@@ -2,6 +2,12 @@
 
 Platform 2D game made in pure 6502 assembly for the NES.
 
+## Structure of the game
+
+Game Layout
+
+[Reset]
+
 ## Install
 
 You must have NESASM3 and execute this command in the src folder :

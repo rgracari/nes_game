@@ -22,7 +22,7 @@ RESET:
   .include "reset.asm"
 
 NMI:
-  .include "update.asm"
+  .include "gameloop.asm"
 
 ;;;;;;;;;; END PRG ROM DATA
 

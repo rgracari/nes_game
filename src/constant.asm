@@ -1,7 +1,12 @@
   .rsset $0000  ;;start variables at ram location 0
-buttons1  .rs 1  ; .rs 1 means reserve one byte of space
-buttons2  .rs 1  ; ball horizontal position
-ballup    .rs 1  ; 1 = ball moving up
+gamestate .rs 1  ; state of the game (intro / game / over)
+buttons1  .rs 1  ; controller 1 input state
+buttons2  .rs 1  ; controller 2 input state
+
+  ; Game Constants
+GAMESTATE_INTRO = $40
+GAMESTATE_GAME = $41
+GAMESTATE_OVER = $42
 
   ; PPU Ports
 PPUCTRL   = $2000
