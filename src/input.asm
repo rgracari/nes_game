@@ -1,11 +1,28 @@
 HandleControls:
   LDA controls1
-  AND  #%00000010
-  BEQ RightDone
-
+  AND  #BUTTON_LEFT
+  BEQ LeftNotPressed
   DEC player1y
+LeftNotPressed:
 
-RightDone:
+  LDA controls1
+  AND  #BUTTON_RIGHT
+  BEQ RightNotPressed
+  INC player1y
+RightNotPressed:
+
+  LDA controls1
+  AND  #BUTTON_UP
+  BEQ UpNotPressed
+  DEC player1x
+UpNotPressed:
+
+  LDA controls1
+  AND  #BUTTON_DOWN
+  BEQ DownNotPressed
+  INC player1x
+DownNotPressed:
+
   RTS
 
 

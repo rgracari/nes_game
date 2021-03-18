@@ -23,6 +23,16 @@ PPUSCROLL = $2005
 PPUADDR   = $2006
 PPUDATA   = $2007
 
+  ; Button Flags
+BUTTON_A      = 1 << 7
+BUTTON_B      = 1 << 6
+BUTTON_SELECT = 1 << 5
+BUTTON_START  = 1 << 4
+BUTTON_UP     = 1 << 3
+BUTTON_DOWN   = 1 << 2
+BUTTON_LEFT   = 1 << 1
+BUTTON_RIGHT  = 1 << 0
+
   ; Controllers Ports
 CONTROL1 = $4016
 CONTROL2 = $4017
