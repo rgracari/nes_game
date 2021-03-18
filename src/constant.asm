@@ -2,6 +2,8 @@
 gamestate   .rs 1  ; state of the game (intro / game / over)
 player1x    .rs 1
 player1y    .rs 1
+player2x    .rs 1
+player2y    .rs 1
 controls1   .rs 1  ; controller 1 input state
 controls2   .rs 1  ; controller 2 input state
 test        .rs 1  ; test var

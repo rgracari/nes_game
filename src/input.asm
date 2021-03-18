@@ -1,4 +1,4 @@
-HandleControls:
+HandleControl1:
   LDA controls1
   AND  #BUTTON_LEFT
   BEQ LeftNotPressed
@@ -22,7 +22,32 @@ UpNotPressed:
   BEQ DownNotPressed
   INC player1x
 DownNotPressed:
+  RTS
 
+HandleControl2:
+  LDA controls2
+  AND  #BUTTON_LEFT
+  BEQ LeftNotPressed2
+  DEC player2y
+LeftNotPressed2:
+
+  LDA controls2
+  AND  #BUTTON_RIGHT
+  BEQ RightNotPressed2
+  INC player2y
+RightNotPressed2:
+
+  LDA controls2
+  AND  #BUTTON_UP
+  BEQ UpNotPressed2
+  DEC player2x
+UpNotPressed2:
+
+  LDA controls2
+  AND  #BUTTON_DOWN
+  BEQ DownNotPressed2
+  INC player2x
+DownNotPressed2:
   RTS
 
 

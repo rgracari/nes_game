@@ -15,7 +15,8 @@ GameUpdateDone:
   RTI
 
 GamteStateIntro:
-  JSR HandleControls
+  JSR HandleControl1
+  JSR HandleControl2
 
   JMP GameUpdateDone
 

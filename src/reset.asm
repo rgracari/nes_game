@@ -56,7 +56,7 @@ LoadSpritesLoop:
   LDA SpritesData, x
   STA $0200, x
   INX
-  CPX #$10
+  CPX #$20
   BNE LoadSpritesLoop
 
 ;;;; Load background Nametable 0
@@ -105,6 +105,10 @@ LoadAttributeLoop:
   LDA #$10
   STA player1x
   STA player1y
+
+  LDA #$80
+  STA player2x
+  STA player2y
 
 ;;;; Loop doing nothing and waiting for the NMI vector
 Forever:
